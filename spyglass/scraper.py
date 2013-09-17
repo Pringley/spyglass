@@ -1,6 +1,3 @@
-import requests
-from bs4 import BeautifulSoup
-
 from .urls import TOP
 from .util import get
 
@@ -9,8 +6,8 @@ class Scraper:
     def top(self, n=10, cache=True):
         if cache and self.cache and len(self._top_cache) >= n:
             return self._top_cache[:n]
-        req = get(TOP)
-        soup = BeautifulSoup(req.text)
+        response = get(TOP)
+        soup = response.soup
         links = soup.find_all("a", "detLink")
         self._top_cache = links
         return self._top_cache[:n]
