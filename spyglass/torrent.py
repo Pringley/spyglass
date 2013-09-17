@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import re
 
 from .util import get
@@ -69,7 +71,7 @@ class Torrent:
             info = self._attrs.copy()
         else:
             info = {}
-        info.update(url=self.url)
+        info.update({"url": self.url})
         return info
 
     def _use_cache(self, cache=None):

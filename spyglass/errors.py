@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 class SpyglassError(Exception):
     """Any error raised by the spyglass library."""
 

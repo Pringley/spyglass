@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from urllib2 import urlopen
 from collections import namedtuple
 from bs4 import BeautifulSoup
