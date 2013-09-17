@@ -8,9 +8,7 @@ setup(
     packages = find_packages(),
     
     install_requires = """
-      beautifulsoup4
-      requests
-      lxml
+      beautifulsoup4>=4.1.2
     """,
 
     author = "Ben Pringle",
