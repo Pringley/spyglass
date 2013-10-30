@@ -15,5 +15,6 @@ setup(
     author = "Ben Pringle",
     author_email = "ben.pringle@gmail.com",
     description = "The Pirate Spyglass: scraper for The Pirate Bay",
+    url = "http://github.com/Pringley/spyglass",
     license = "MIT",
 )
