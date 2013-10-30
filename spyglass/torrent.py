@@ -3,10 +3,33 @@ import re
 from .util import get
 
 class Torrent:
+    """Represent a torrent from TPB.
+
+    The torrent exists in three modes:
+
+    -   Cache=False: a network connection will be created each time any
+        property is accessed (to get the most current data).
+
+    -   Cache=True and prefetch=True: all torrent info will be downloaded on
+        creation and saved for each property access.
+
+    -   Cache=True and prefetch=False: torrent info will be lazy-fetched when
+        needed, but then saved for subsequent property accesses.
+
+    """
     _keys = ['title', 'type', 'files', 'size', 'uploaded', 'submitter',
              'seeders', 'leechers', 'comments', 'link']
 
     def __init__(self, url, cache=True, prefetch=False):
+        """Create a Torrent object representing a URL.
+
+        The URL should be the info page on The Pirate Bay, not the magnet link.
+
+        Set the cache flag to False if you want the page re-queried on each
+        property access. Set the prefetch flag to True to disable lazy
+        fetching.
+
+        """
         self.url = url
         self.cache = cache
         self.reset()
@@ -16,11 +39,16 @@ class Torrent:
             self.fetch()
 
     def reset(self):
+        """Reset the cache."""
         self._attrs = {}
         self._fetched = False
 
     def fetch(self, cache=None):
-        """Get info for this torrent from The Pirate Bay."""
+        """Query the info page to fill in the property cache.
+
+        Return a dictionary with the fetched properties and values.
+
+        """
         self.reset()
         soup = get(self.url).soup
         details = soup.find(id="detailsframe")
@@ -47,6 +75,12 @@ class Torrent:
         return info
 
     def get(self, item, cache=None):
+        """Lookup a torrent info property.
+
+        If cache is True, check the cache first. If the cache is empty, then
+        fetch torrent info before returning it.
+
+        """
         if item not in self._keys:
             raise KeyError(item)
         if self._use_cache(cache) and self._fetched:
@@ -63,6 +97,12 @@ class Torrent:
         return self.get(item)
 
     def as_dict(self, cache=None, fetch=False):
+        """Return torrent properties as a dictionary.
+
+        Set the cache flag to False to disable the cache. On the other hand,
+        set the fetch flag to False to avoid fetching data if it's not cached.
+
+        """
         if not self._fetched and fetch:
             info = self.fetch(cache)
         elif self._use_cache(cache):
@@ -79,4 +119,5 @@ class Torrent:
         return self._keys
 
     def is_fetched(self):
+        """Return True if all properties have been fetched."""
         return _fetched
