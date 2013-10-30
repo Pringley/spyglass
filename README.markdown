@@ -4,13 +4,11 @@ Scrape the Pirate Bay.
 
 ## Installation
 
-Clone the repository and install using `setup.py`.
+Install using [pip](http://pip-installer.org):
 
-    git clone https://github.com/Pringley/spyglass.git
-    cd spyglass
-    python setup.py install
+    pip install spyglass
 
-(The last command may require administrator/`sudo` privileges.)
+This may require administrator/`sudo` privileges.
 
 ## Usage
 
