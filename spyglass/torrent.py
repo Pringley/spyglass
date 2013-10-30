@@ -83,10 +83,15 @@ class Torrent:
         """
         if item not in self._keys:
             raise KeyError(item)
-        if self._use_cache(cache) and self._fetched:
+        if self._use_cache(cache) and (self._fetched or
+                item in self._attrs):
             return self._attrs[item]
         info = self.fetch(cache=cache)
         return info[item]
+
+    def set(self, item, value):
+        """Add an value to the cache."""
+        self._attrs[item] = value
 
     def __getitem__(self, item): 
         return self.get(item)
