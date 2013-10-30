@@ -1,0 +1,3 @@
+#!/usr/bin/env python
+import spyglass.cli
+spyglass.cli.main()

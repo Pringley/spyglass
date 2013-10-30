@@ -6,6 +6,7 @@ setup(
     name = "spyglass",
     version = "0.0.1",
     packages = find_packages(),
+    scripts = ['exe/spyglass'],
     
     install_requires = """
       beautifulsoup4>=4.1.2
