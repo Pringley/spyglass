@@ -1,4 +1,5 @@
 import re
+import json
 
 from .util import get
 
@@ -100,6 +101,15 @@ class Torrent:
         if item not in self._keys:
             raise AttributeError(item)
         return self.get(item)
+
+    def as_json(self, cache=None, fetch=True):
+        """Return torrent properties in JSON.
+
+        Set the cache flag to False to disable the cache. On the other hand,
+        set the fetch flag to False to avoid fetching data if it's not cached.
+
+        """
+        return json.dumps(self.as_dict())
 
     def as_dict(self, cache=None, fetch=True):
         """Return torrent properties as a dictionary.
