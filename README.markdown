@@ -4,7 +4,7 @@ Scrape the Pirate Bay.
 
 ## Usage
 
-**Not yet implemented.**
+### `spyglass.top()` -- most popular torrents
 
     for torrent in spyglass.top(10):
         print torrent.title, torrent.seeders, torrent.url
