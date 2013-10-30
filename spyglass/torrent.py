@@ -101,7 +101,7 @@ class Torrent:
             raise AttributeError(item)
         return self.get(item)
 
-    def as_dict(self, cache=None, fetch=False):
+    def as_dict(self, cache=None, fetch=True):
         """Return torrent properties as a dictionary.
 
         Set the cache flag to False to disable the cache. On the other hand,
